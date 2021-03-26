@@ -31,4 +31,9 @@ class Game extends Equatable {
         coverReferenceId,
         rating,
       ];
+
+  @override
+  String toString() =>
+      'Game {checksum : $checksum, name : $name, summary : $summary, '
+      'storyline : $storyline, url : $url, coverReferenceId : $coverReferenceId, rating : $rating}';
 }
