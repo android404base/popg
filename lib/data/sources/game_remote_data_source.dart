@@ -4,5 +4,5 @@ abstract class GameRemoteDataSource {
   /// Calls the ​https://api-docs.igdb.com/#game
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<GameModel> getAllGames();
+  Future<List<GameModel>> getAllGames();
 }

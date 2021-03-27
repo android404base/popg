@@ -1,14 +1,19 @@
+import 'package:floor/floor.dart';
+
 import '../models/game_model.dart';
 
-abstract class GameLocalDataSource {
+@dao
+abstract class GameModelDao {
   /// Gets the cached [GameModel] list which was retrieved the last time
   /// the user had an internet connection.
   ///
   /// Throws [NoLocalDataException] if no cached data is present.
-  Future<GameModel> getAllGames();
+  @Query('SELECT * FROM GameModel')
+  Future<List<GameModel>> getLastAllGames();
 
-  /// Stores [GameModel] list into device with floor.
+  /// Stores [GameModel] into device with floor.
   ///
   /// Throws [CacheException] if something goes wrong.
-  Future<void> saveGames(List<GameModel> games);
+  @insert
+  Future<void> saveGames(GameModel game);
 }

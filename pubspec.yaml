@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -21,18 +21,20 @@ dependencies:
   # Functional programming
   dartz: ^0.9.2
   # Floor library for local storage
-  floor: ^1.0.0
+  floor: ^1.0.1
   # For OS-specific directory paths
   path_provider: ^2.0.1
   # Fetch data from API
-  http: ^0.13.1
+  dio: ^3.0.10
+  # Check the internet connection
+  data_connection_checker: ^0.3.4
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # Floor library
-  floor_generator: ^1.0.0
+  floor_generator: ^1.0.1
   build_runner:
 
 

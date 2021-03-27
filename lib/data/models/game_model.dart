@@ -15,13 +15,13 @@ class GameModel extends Equatable {
   final double rating;
 
   GameModel({
-    @required this.checksum,
-    @required this.name,
-    @required this.summary,
-    @required this.storyline,
-    @required this.url,
-    @required this.coverReferenceId,
-    @required this.rating,
+    required this.checksum,
+    required this.name,
+    required this.summary,
+    required this.storyline,
+    required this.url,
+    required this.coverReferenceId,
+    required this.rating,
   });
 
   @override
