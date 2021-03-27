@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../entities/entities.dart';
+import '../entities/game.dart';
 import '../../core/errors/failures.dart';
 
 abstract class GameRepository {
