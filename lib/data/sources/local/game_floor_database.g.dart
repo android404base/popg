@@ -101,7 +101,7 @@ class _$GameModelDao extends GameModelDao {
             database,
             'GameModel',
             (GameModel item) => <String, Object?>{
-                  'checksum': item.checksum,
+                  'id': item.id,
                   'name': item.name,
                   'summary': item.summary,
                   'storyline': item.storyline,
@@ -120,19 +120,24 @@ class _$GameModelDao extends GameModelDao {
 
   @override
   Future<List<GameModel>> getLastAllGames() async {
-    return _queryAdapter.queryList('SELECT * FROM GameModel',
+    final result = await _queryAdapter.queryList('SELECT * FROM GameModel',
         mapper: (Map<String, Object?> row) => GameModel(
-            checksum: row['checksum'] as String,
+            id: row['id'] as int,
             name: row['name'] as String,
             summary: row['summary'] as String,
             storyline: row['storyline'] as String,
             url: row['url'] as String,
             coverReferenceId: row['coverReferenceId'] as String,
             rating: row['rating'] as double));
+    if (result.isNotEmpty) {
+      return result;
+    } else {
+      throw CacheException();
+    }
   }
 
   @override
-  Future<void> saveGames(GameModel game) async {
+  Future<void> saveGame(GameModel game) async {
     await _gameModelInsertionAdapter.insert(game, OnConflictStrategy.abort);
   }
 }

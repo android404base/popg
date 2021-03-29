@@ -1,3 +1,4 @@
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
@@ -20,12 +21,12 @@ class GameRepositoryImpl implements GameRepository {
   });
 
   @override
-  Future<Either<Failure, List<Game>>> getAllGames() async {
+  Future<Either<Failure, List<Game>>> getAllGames(int offset) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteGames = await remoteDataSource.getAllGames();
+        final remoteGames = await remoteDataSource.getAllGames(offset);
         remoteGames.forEach((game) {
-          localDataSource.saveGames(game);
+          localDataSource.saveGame(game);
         });
         return Right(
             remoteGames.map((model) => Game.fromModel(model)).toList());

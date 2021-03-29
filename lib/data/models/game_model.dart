@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
 @entity
 class GameModel extends Equatable {
   @primaryKey
-  final String checksum;
+  final int id;
+
   final String name;
   final String summary;
   final String storyline;
@@ -15,7 +15,7 @@ class GameModel extends Equatable {
   final double rating;
 
   GameModel({
-    required this.checksum,
+    required this.id,
     required this.name,
     required this.summary,
     required this.storyline,
@@ -26,7 +26,7 @@ class GameModel extends Equatable {
 
   @override
   List<Object> get props => [
-        checksum,
+        id,
         name,
         summary,
         storyline,
@@ -36,12 +36,11 @@ class GameModel extends Equatable {
       ];
 
   @override
-  String toString() =>
-      'GameModel {checksum : $checksum, name : $name, summary : $summary, '
+  String toString() => 'GameModel {id : $id, name : $name, summary : $summary, '
       'storyline : $storyline, url : $url, coverReferenceId : $coverReferenceId, rating : $rating}';
 
   factory GameModel.fromJson(Map<String, dynamic> json) => GameModel(
-        checksum: json['checksum'],
+        id: (json['id'] as num).toInt(),
         name: json['name'],
         summary: json['summary'],
         storyline: json['storyline'],

@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/game_model.dart';
 
 class Game extends Equatable {
-  final String checksum;
+  final int id;
+
   final String name;
   final String summary;
   final String storyline;
@@ -14,7 +14,7 @@ class Game extends Equatable {
   final double rating;
 
   Game({
-    required this.checksum,
+    required this.id,
     required this.name,
     required this.summary,
     required this.storyline,
@@ -25,7 +25,7 @@ class Game extends Equatable {
 
   @override
   List<Object> get props => [
-        checksum,
+        id,
         name,
         summary,
         storyline,
@@ -35,12 +35,11 @@ class Game extends Equatable {
       ];
 
   @override
-  String toString() =>
-      'Game {checksum : $checksum, name : $name, summary : $summary, '
+  String toString() => 'Game {id : $id, name : $name, summary : $summary, '
       'storyline : $storyline, url : $url, coverReferenceId : $coverReferenceId, rating : $rating}';
 
   GameModel toModel() => GameModel(
-        checksum: checksum,
+        id: id,
         name: name,
         summary: summary,
         storyline: storyline,
@@ -50,7 +49,7 @@ class Game extends Equatable {
       );
 
   static Game fromModel(GameModel model) => Game(
-        checksum: model.checksum,
+        id: model.id,
         name: model.name,
         summary: model.summary,
         storyline: model.storyline,

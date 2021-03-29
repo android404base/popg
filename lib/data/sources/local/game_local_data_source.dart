@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 
-import '../models/game_model.dart';
+import '../../models/game_model.dart';
 
 @dao
 abstract class GameModelDao {
@@ -15,5 +15,5 @@ abstract class GameModelDao {
   ///
   /// Throws [CacheException] if something goes wrong.
   @insert
-  Future<void> saveGames(GameModel game);
+  Future<void> saveGame(GameModel game);
 }
