@@ -80,7 +80,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `GameModel` (`checksum` TEXT NOT NULL, `name` TEXT NOT NULL, `summary` TEXT NOT NULL, `storyline` TEXT NOT NULL, `url` TEXT NOT NULL, `coverReferenceId` TEXT NOT NULL, `rating` REAL NOT NULL, PRIMARY KEY (`checksum`))');
+            'CREATE TABLE IF NOT EXISTS `GameModel` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `summary` TEXT NOT NULL, `storyline` TEXT NOT NULL, `url` TEXT NOT NULL, `coverReferenceId` TEXT NOT NULL, `rating` REAL NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -120,7 +120,7 @@ class _$GameModelDao extends GameModelDao {
 
   @override
   Future<List<GameModel>> getLastAllGames() async {
-    final result = await _queryAdapter.queryList('SELECT * FROM GameModel',
+    return _queryAdapter.queryList('SELECT * FROM GameModel',
         mapper: (Map<String, Object?> row) => GameModel(
             id: row['id'] as int,
             name: row['name'] as String,
@@ -129,11 +129,6 @@ class _$GameModelDao extends GameModelDao {
             url: row['url'] as String,
             coverReferenceId: row['coverReferenceId'] as String,
             rating: row['rating'] as double));
-    if (result.isNotEmpty) {
-      return result;
-    } else {
-      throw CacheException();
-    }
   }
 
   @override
