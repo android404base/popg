@@ -21,13 +21,13 @@ class GameRepositoryImpl implements GameRepository {
   });
 
   @override
-  Future<Either<Failure, List<Game>>> getAllGames(int offset) async {
+  Future<Either<Failure, List<Game>>> getAllGames(int offset, int limit) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteGames = await remoteDataSource.getAllGames(offset);
-        remoteGames.forEach((game) {
-          localDataSource.saveGame(game);
-        });
+        final remoteGames = await remoteDataSource.getAllGames(offset, limit);
+//        remoteGames.forEach((game) {
+//          localDataSource.saveGame(game); //TODO Check with id, create all func.
+//        });
         return Right(
             remoteGames.map((model) => Game.fromModel(model)).toList());
       } on ServerException {

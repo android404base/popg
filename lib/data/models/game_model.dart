@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
@@ -45,7 +47,7 @@ class GameModel extends Equatable {
         summary: json['summary'],
         storyline: json['storyline'],
         url: json['url'],
-        coverReferenceId: json['coverReferenceId'],
+        coverReferenceId: json['cover']['url'],
         rating: (json['rating'] as num).toDouble(),
       );
 }

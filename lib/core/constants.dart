@@ -21,7 +21,7 @@ const String requestBody =
     'fields name,summary,storyline,url,cover.url,rating; '
     'where name != null & summary != null & storyline != null & '
     'url != null & cover.url != null & rating != null; '
-    'limit 2; ';
+    'limit 10; ';
 
 /// [ServerFailure] error message
 const serverFailureMessage = 'ServerFailure';

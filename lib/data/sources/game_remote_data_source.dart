@@ -12,7 +12,7 @@ abstract class GameRemoteDataSource {
   /// Calls the ​https://api-docs.igdb.com/#game
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<List<GameModel>> getAllGames(int offset);
+  Future<List<GameModel>> getAllGames(int offset, int limit);
 }
 
 class GameRemoteDataSourceImpl implements GameRemoteDataSource {
@@ -23,7 +23,7 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
   });
 
   @override
-  Future<List<GameModel>> getAllGames(int offset) async {
+  Future<List<GameModel>> getAllGames(int offset, int limit) async {
     final _baseOptions = Options(
       headers: {
         constants.clientIdKey: constants.clientIdValue,
