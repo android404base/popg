@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
+/// [GameModel] represent tha data provided by our data providers.
+///
 @entity
 class GameModel extends Equatable {
   @primaryKey

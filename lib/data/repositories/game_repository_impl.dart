@@ -8,6 +8,11 @@ import '../sources/sources.dart';
 import '../../core/network/network_info.dart';
 import '../../core/errors/exception.dart';
 
+/// Gets fresh data from the API when there is an Internet connection
+/// and to get the cached data when the user is offline
+///
+/// Returns [ServerFailure] and [CacheFailure] when an error occurred.
+
 class GameRepositoryImpl implements GameRepository {
   final GameRemoteDataSource remoteDataSource;
   final GameModelDao localDataSource;

@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/models/game_model.dart';
 
+/// [Game] class is plain dart class which we will use in Flutter part.
+///
 class Game extends Equatable {
   final int id;
 
