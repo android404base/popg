@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popg/bloc/list_games/list_games.dart';
-import 'package:popg/core/constants.dart';
 
 import 'dependency_injection.dart' as di;
 import 'presentation/screens/screens.dart';

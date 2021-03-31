@@ -132,7 +132,21 @@ class _$GameModelDao extends GameModelDao {
   }
 
   @override
+  Future<GameModel?> findGameById(int id) async {
+    return _queryAdapter.query('SELECT * FROM GameModel WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => GameModel(
+            id: row['id'] as int,
+            name: row['name'] as String,
+            summary: row['summary'] as String,
+            storyline: row['storyline'] as String,
+            url: row['url'] as String,
+            coverReferenceId: row['coverReferenceId'] as String,
+            rating: row['rating'] as double),
+        arguments: [id]);
+  }
+
+  @override
   Future<void> saveGame(GameModel game) async {
-    await _gameModelInsertionAdapter.insert(game, OnConflictStrategy.abort);
+    await _gameModelInsertionAdapter.insert(game, OnConflictStrategy.replace);
   }
 }

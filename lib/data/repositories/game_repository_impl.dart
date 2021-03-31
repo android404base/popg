@@ -1,6 +1,5 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 
 import '../../core/errors/failures.dart';
 import '../../domain/entities/game.dart';
@@ -25,9 +24,11 @@ class GameRepositoryImpl implements GameRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteGames = await remoteDataSource.getAllGames(offset, limit);
-//        remoteGames.forEach((game) {
-//          localDataSource.saveGame(game); //TODO Check with id, create all func.
-//        });
+
+        remoteGames.forEach((game) async {
+          localDataSource.saveGame(game); //TODO Check with id, create all func.
+        });
+
         return Right(
             remoteGames.map((model) => Game.fromModel(model)).toList());
       } on ServerException {

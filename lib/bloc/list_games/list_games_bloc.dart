@@ -2,7 +2,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
-import 'package:rxdart/rxdart.dart';
 
 import '../../domain/repositories/game_repository.dart';
 import '../../domain/entities/game.dart';
@@ -18,7 +17,7 @@ class ListGamesBloc extends Bloc<ListGamesEvent, ListGamesState> {
   @override
   Stream<ListGamesState> mapEventToState(ListGamesEvent event) async* {
     final currentState = state;
-    if (event is ListGamesLoaded) {
+    if (event is ListGamesLoaded && !_hasReachedMax(currentState)) {
       if (currentState is ListGamesLoadInitial) {
         yield* _mapListGamesLoadedToState(event);
       }
@@ -27,6 +26,9 @@ class ListGamesBloc extends Bloc<ListGamesEvent, ListGamesState> {
       }
     }
   }
+
+  bool _hasReachedMax(ListGamesState state) =>
+      state is ListGamesLoadSuccess && state.hasReachedMax;
 
   Stream<ListGamesState> _mapListGamesLoadedToState(
       ListGamesLoaded event) async* {
@@ -43,10 +45,14 @@ class ListGamesBloc extends Bloc<ListGamesEvent, ListGamesState> {
     final Either<Failure, List<Game>> failureOrNewGames =
         await gameRepository.getAllGames(event.offset, event.limit);
     yield failureOrNewGames.fold(
-      (failure) => ListGamesLoadFailure(message: _mapFailureToMessage(failure)),
-      (newGames) => currentState.copyWith(
-          List.of(currentState.games)..addAll(newGames), false),
-    );
+        (failure) =>
+            ListGamesLoadFailure(message: _mapFailureToMessage(failure)),
+        (newGames) {
+      return newGames[0] == currentState.games[0]
+          ? currentState.copyWith(currentState.games, true)
+          : currentState.copyWith(
+              List.of(currentState.games)..addAll(newGames), false);
+    });
   }
 
   String _mapFailureToMessage(Failure failure) {
