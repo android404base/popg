@@ -3,7 +3,6 @@ import 'package:popg/presentation/screens/details_screen.dart';
 import 'package:popg/presentation/widgets/custom_rating_bar.dart';
 
 import '../../core/constants.dart';
-import '../widgets/widgets.dart';
 
 class ListItem extends StatelessWidget {
   final int id;
@@ -33,6 +32,13 @@ class ListItem extends StatelessWidget {
               headers: {
                 clientIdKey: clientIdValue,
                 authKey: authValue,
+              },
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return const Icon(
+                  Icons.error_outline,
+                  size: 45,
+                );
               },
             ),
             title: Text(

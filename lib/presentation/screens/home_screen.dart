@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popg/presentation/widgets/failure_widget.dart';
 
 import '../../bloc/list_games/list_games.dart';
 import '../widgets/widgets.dart';
@@ -32,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       if (state is ListGamesLoadSuccess) {
         offset = state.games.length;
-        print(offset);
         return ListView.builder(
           itemCount:
               state.hasReachedMax ? state.games.length : state.games.length + 1,
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
       if (state is ListGamesLoadFailure) {
-        return Center(child: Text(state.message));
+        return FailureWidget(failureMessage: state.message);
       } else {
         return Center(child: Text('Unexpected Error!'));
       }

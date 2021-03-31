@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +49,17 @@ class DetailsScreen extends StatelessWidget {
                           headers: {
                             clientIdKey: clientIdValue,
                             authKey: authValue,
+                          },
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 30.0, top: 30.0, bottom: 30.0),
+                              child: const Placeholder(
+                                color: Colors.grey,
+                                fallbackHeight: 120,
+                              ),
+                            );
                           },
                           fit: BoxFit.cover,
                         ),
