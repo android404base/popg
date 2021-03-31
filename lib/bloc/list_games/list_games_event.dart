@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/game.dart';
-
 abstract class ListGamesEvent extends Equatable {
   const ListGamesEvent();
 
@@ -9,21 +7,21 @@ abstract class ListGamesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ListGamesLoaded extends ListGamesEvent {}
-
-class ListGamesRefreshed extends ListGamesEvent {
-  final List<Game> fetchedGames;
+class ListGamesLoaded extends ListGamesEvent {
   final int offset;
+  final int limit;
 
-  const ListGamesRefreshed({
-    required this.fetchedGames,
+  const ListGamesLoaded({
     required this.offset,
+    required this.limit,
   });
 
   @override
-  List<Object> get props => [fetchedGames, offset];
+  List<Object> get props => [
+        offset,
+        limit,
+      ];
 
   @override
-  String toString() =>
-      ('ListGamesRefreshed {fetchedGames : $fetchedGames, offset : $offset}');
+  String toString() => ('ListGamesLoaded { offset : $offset, limit : $limit}');
 }

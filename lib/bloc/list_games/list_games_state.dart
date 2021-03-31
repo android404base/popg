@@ -9,18 +9,36 @@ abstract class ListGamesState extends Equatable {
   List<Object> get props => [];
 }
 
-class ListGamesLoadInProgress extends ListGamesState {}
+class ListGamesLoadInitial extends ListGamesState {}
 
 class ListGamesLoadSuccess extends ListGamesState {
   final List<Game> games;
+  final bool hasReachedMax;
 
-  const ListGamesLoadSuccess(this.games);
+  const ListGamesLoadSuccess({
+    required this.games,
+    required this.hasReachedMax,
+  });
+
+  ListGamesLoadSuccess copyWith(
+    List<Game> games,
+    bool hasReachedMax,
+  ) {
+    return ListGamesLoadSuccess(
+      games: games,
+      hasReachedMax: hasReachedMax,
+    );
+  }
 
   @override
-  List<Object> get props => [games];
+  List<Object> get props => [
+        games,
+        hasReachedMax,
+      ];
 
   @override
-  String toString() => 'ListGamesLoadSuccess : {member : $games}';
+  String toString() =>
+      'ListGamesLoadSuccess : {member : $games, hasReachedMax : $hasReachedMax}';
 }
 
 class ListGamesLoadFailure extends ListGamesState {
