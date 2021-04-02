@@ -1,5 +1,6 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../core/errors/failures.dart';
 import '../../domain/entities/game.dart';
@@ -31,12 +32,12 @@ class GameRepositoryImpl implements GameRepository {
         final remoteGames = await remoteDataSource.getAllGames(offset, limit);
 
         remoteGames.forEach((game) async {
-          localDataSource.saveGame(game); //TODO Check with id, create all func.
+          localDataSource.saveGame(game);
         });
 
         return Right(
             remoteGames.map((model) => Game.fromModel(model)).toList());
-      } on ServerException {
+      } catch (_) {
         return Left(ServerFailure());
       }
     } else {

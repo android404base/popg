@@ -30,8 +30,6 @@ dependencies:
   data_connection_checker: ^0.3.4
   # Service locator
   get_it: ^6.0.0
-  # ReactiveX api
-  rxdart: ^0.26.0
   # Rating bar
   flutter_rating_bar: ^4.0.0
   # Url launcher
